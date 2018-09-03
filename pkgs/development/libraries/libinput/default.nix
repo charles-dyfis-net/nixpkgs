@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
     (mkFlag testsSupport "tests")
   ];
 
-  nativeBuildInputs = [ pkgconfig meson ninja ]
+  nativeBuildInputs = [ pkgconfig meson ninja python3Packages.python ]
     ++ optionals documentationSupport [ doxygen graphviz ]
     ++ optionals testsSupport [ check valgrind python3Packages.pyparsing ];
 
