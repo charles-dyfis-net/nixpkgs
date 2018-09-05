@@ -51,7 +51,7 @@ lib.makeScope pkgs.newScope (self: with self; {
   gtk = gtk3;
   gtkmm = gtkmm3;
   vala = pkgs.vala_0_40;
-  gegl_0_3 = pkgs.gegl_0_3.override { inherit gtk; };
+  gegl_0_4 = pkgs.gegl_0_4.override { inherit gtk; };
 
 # Simplify the nixos module and gnome packages
   defaultIconTheme = adwaita-icon-theme;
@@ -286,7 +286,7 @@ lib.makeScope pkgs.newScope (self: with self; {
   gnome-nettool = callPackage ./apps/gnome-nettool { };
 
   gnome-photos = callPackage ./apps/gnome-photos {
-    gegl = gegl_0_3;
+    gegl = gegl_0_4;
   };
 
   gnome-power-manager = callPackage ./apps/gnome-power-manager { };
