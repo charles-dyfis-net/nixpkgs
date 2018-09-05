@@ -4,11 +4,11 @@
 
 stdenv.mkDerivation rec {
   name = "gnome-session-${version}";
-  version = "3.28.1";
+  version = "3.30.0";
 
   src = fetchurl {
     url = "mirror://gnome/sources/gnome-session/${gnome3.versionBranch version}/${name}.tar.xz";
-    sha256 = "14nmbirgrp2nm16khbz109saqdlinlbrlhjnbjydpnrlimfgg4xq";
+    sha256 = "0qfd0j6jyn2gzag94ndkibfk33v74khixa3wdb1s9l9qrqlapsr9";
   };
 
   patches = [
@@ -39,11 +39,6 @@ stdenv.mkDerivation rec {
   '';
 
   preFixup = ''
-    for desktopFile in $(grep -rl "Exec=gnome-session" $out/share)
-    do
-      echo "Patching gnome-session path in: $desktopFile"
-      sed -i "s,Exec=gnome-session,Exec=$out/bin/gnome-session," $desktopFile
-    done
     wrapProgram "$out/bin/gnome-session" \
       --prefix GI_TYPELIB_PATH : "$GI_TYPELIB_PATH" \
       --suffix XDG_DATA_DIRS : "$out/share:$GSETTINGS_SCHEMAS_PATH" \
