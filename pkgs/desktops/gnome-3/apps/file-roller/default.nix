@@ -3,11 +3,11 @@
 
 stdenv.mkDerivation rec {
   name = "file-roller-${version}";
-  version = "3.28.1";
+  version = "3.30.0";
 
   src = fetchurl {
     url = "mirror://gnome/sources/file-roller/${gnome3.versionBranch version}/${name}.tar.xz";
-    sha256 = "09y2blmlsccfxc2npcayhicq00r9n03897s1aizkahn1m970hjsp";
+    sha256 = "1xagc6x1vmv00w0mcz82kq7q5hb6wj1c7dldg6xjws2gcby202qr";
   };
 
   LANG = "en_US.UTF-8"; # postinstall.py
@@ -21,6 +21,7 @@ stdenv.mkDerivation rec {
   postPatch = ''
     chmod +x postinstall.py # patchShebangs requires executable file
     patchShebangs postinstall.py
+    patchShebangs data/set-mime-type-entry.py
   '';
 
   passthru = {
