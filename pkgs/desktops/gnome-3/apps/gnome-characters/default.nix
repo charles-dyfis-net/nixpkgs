@@ -3,11 +3,11 @@
 
 stdenv.mkDerivation rec {
   name = "gnome-characters-${version}";
-  version = "3.28.2";
+  version = "3.29.91";
 
   src = fetchurl {
     url = "mirror://gnome/sources/gnome-characters/${gnome3.versionBranch version}/${name}.tar.xz";
-    sha256 = "04nmn23iw65wsczx1l6fa4jfdsv65klb511p39zj1pgwyisgj5l0";
+    sha256 = "0c76rlyfrdiflx9zlhfdm9civmvxawpn97a1q1f0zaszni1gncb4";
   };
 
   postPatch = ''
