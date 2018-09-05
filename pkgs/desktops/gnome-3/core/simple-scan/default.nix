@@ -4,19 +4,17 @@
 
 stdenv.mkDerivation rec {
   name = "simple-scan-${version}";
-  version = "3.28.1";
+  version = "3.30.0";
 
   src = fetchurl {
-    url = "mirror://gnome/sources/simple-scan/${gnome3.versionBranch version}/${name}.tar.xz";
-    sha256 = "140vz94vml0vf6kiw3sg436qfvajk21x6q86smvycgf24qfyvk6a";
+    url = "mirror://gnome/sources/simple-scan/${stdenv.lib.versions.majorMinor version}/${name}.tar.xz";
+    sha256 = "08nbiw64v70a00cdwfm2gh0jhyxjrzmw3mq9dqfqj1f6h6ymiqrw";
   };
 
-  passthru = {
-    updateScript = gnome3.updateScript { packageName = "simple-scan"; };
-  };
-
-  buildInputs = [ cairo gdk_pixbuf colord glib gnome3.defaultIconTheme gusb
-                gtk libwebp packagekit sane-backends vala ];
+  buildInputs = [
+    cairo gdk_pixbuf colord glib gnome3.defaultIconTheme gusb
+    gtk libwebp packagekit sane-backends vala
+  ];
   nativeBuildInputs = [
     meson ninja gettext itstool pkgconfig python3 wrapGAppsHook libxml2
     # For setup hook
@@ -25,29 +23,15 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     patchShebangs data/meson_compile_gschema.py
-
-    sed -i -e 's#Icon=scanner#Icon=simple-scan#g' ./data/simple-scan.desktop.in
   '';
-
-  postInstall = ''
-    mkdir -p $out/share/icons
-    mv $out/share/simple-scan/icons/* $out/share/icons/
-    (
-    cd ${gnome3.defaultIconTheme}/share/icons/Adwaita
-    for f in `find . | grep 'scanner\.'`
-    do
-      local outFile="`echo "$out/share/icons/hicolor/$f" | sed \
-        -e 's#/devices/#/apps/#g' \
-        -e 's#scanner\.#simple-scan\.#g'`"
-      mkdir -p "`realpath -m "$outFile/.."`"
-      cp "$f" "$outFile"
-    done
-    )
-  '';
-
-  enableParallelBuilding = true;
 
   doCheck = true;
+
+  passthru = {
+    updateScript = gnome3.updateScript {
+      packageName = "simple-scan";
+    };
+  };
 
   meta = with stdenv.lib; {
     description = "Simple scanning utility";
