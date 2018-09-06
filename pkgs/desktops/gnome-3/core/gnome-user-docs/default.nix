@@ -2,11 +2,11 @@
 
 stdenv.mkDerivation rec {
   name = "gnome-user-docs-${version}";
-  version = "3.28.2";
+  version = "3.30.0";
 
   src = fetchurl {
     url = "mirror://gnome/sources/gnome-user-docs/${gnome3.versionBranch version}/${name}.tar.xz";
-    sha256 = "0gg1rgg15lbgjdwpwlqazfjv8sm524ys024qsd4n09jlgx21jscd";
+    sha256 = "02ga3y9w1hrb0qlm038mfcavdfdw770m5pbzycywzn243aybny5r";
   };
 
   passthru = {
