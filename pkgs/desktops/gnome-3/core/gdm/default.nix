@@ -47,7 +47,6 @@ stdenv.mkDerivation rec {
       src = ./fix-paths.patch;
       inherit coreutils plymouth xwayland;
     })
-    ./sessions_dir.patch
     ./gdm-x-session_extra_args.patch
     ./gdm-session-worker_xserver-path.patch
   ];

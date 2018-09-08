@@ -109,7 +109,7 @@ in
         environment = {
           GDM_X_SERVER_EXTRA_ARGS = toString
             (filter (arg: arg != "-terminate") cfg.xserverArgs);
-          GDM_SESSIONS_DIR = "${cfg.session.desktops}/share/xsessions";
+          XDG_DATA_DIRS = "${cfg.session.desktops}/share/";
           # Find the mouse
           XCURSOR_PATH = "~/.icons:${pkgs.gnome3.adwaita-icon-theme}/share/icons";
         };
