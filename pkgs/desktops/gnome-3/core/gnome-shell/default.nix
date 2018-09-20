@@ -59,6 +59,13 @@ in stdenv.mkDerivation rec {
       inherit (gnome3) libgnomekbd;
       inherit unzip;
     })
+    # Fix connection to wifi APs from user menu:
+    # https://gitlab.gnome.org/GNOME/gnome-shell/commit/33ffdd60611e8e8d0018680dd97bcbd0e98c6b4b
+    (fetchpatch {
+      url = https://gitlab.gnome.org/GNOME/gnome-shell/commit/33ffdd60611e8e8d0018680dd97bcbd0e98c6b4b.diff;
+      sha256 = "1v406skiw4054sc90ggr2c5a89z54prmiqlwff88c9b38bayjx91";
+
+    })
   ];
 
   postPatch = ''
